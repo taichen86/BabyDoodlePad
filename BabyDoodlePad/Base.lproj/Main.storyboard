@@ -157,7 +157,7 @@
                                         <color key="backgroundColor" red="1" green="0.94202611606641096" blue="0.97967742867147689" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Rainbow" image="splat"/>
                                         <connections>
-                                            <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ChZ-a8-bMD"/>
+                                            <action selector="rainbowPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5fM-z6-g0A"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -9,7 +9,8 @@
 import UIKit
 
 enum DrawMode {
-    case draw
+    case standard
+    case rainbow
     case sticker
 }
 
@@ -22,8 +23,9 @@ class DrawingViewController: UIViewController {
     
     var lastPoint = CGPoint(x: 0, y: 0)
     var currentColor = UIColor.white.cgColor
+    var currentColorIndex = 0
     
-    var drawMode = DrawMode.draw
+    var drawMode = DrawMode.standard
     var currentSticker : Int = 0
     
     override func viewDidLoad() {
@@ -68,8 +70,8 @@ class DrawingViewController: UIViewController {
     // MARK: right panel buttons
     
     @IBAction func brushOptionsPressed(_ sender: UIButton) {
-        drawMode = .draw
-        toggleBrushPanel()
+        drawMode = .standard
+    //    toggleBrushPanel()
     }
 
     func toggleBrushPanel() {
@@ -77,7 +79,12 @@ class DrawingViewController: UIViewController {
     }
     
     @IBAction func colorPressed(_ sender: UIButton) {
-        currentColor = Palette.colors[sender.tag].cgColor
+        currentColorIndex = sender.tag
+        currentColor = Palette.colors[currentColorIndex].cgColor
+        drawMode = .standard
+    }
+    @IBAction func rainbowPressed(_ sender: UIButton) {
+        drawMode = .rainbow
     }
     
   
@@ -89,23 +96,49 @@ class DrawingViewController: UIViewController {
         leftOptionsStackWidth.constant = 0
         brushStackWidth.constant = 0
         
-        if drawMode == .sticker {
+        switch drawMode {
+        case .sticker:
             animateSticker(p1: lastPoint)
             placeSticker(p1: lastPoint)
+        case .rainbow:
+            colorChangedAt = beginPoint
+        default:
+            break
         }
+        
+ 
         
     }
     
+    var colorChangedAt = CGPoint.zero
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let movedPoint = touches.first?.location(in: imageView) else { return }
-        if drawMode == .sticker { return }
-        drawLine(p1: lastPoint, p2: movedPoint)
+        
+        switch drawMode {
+        case .standard:
+            drawLine(p1: lastPoint, p2: movedPoint)
+        case .rainbow:
+            if distanceBetween(p1: colorChangedAt, p2: movedPoint) > 50 {
+                currentColorIndex += 1
+                currentColor = Palette.colors[currentColorIndex % 5].cgColor
+                colorChangedAt = movedPoint
+            }
+            drawLine(p1: lastPoint, p2: movedPoint)
+        default: // sticker
+            break
+            
+        }
+                
         lastPoint = movedPoint
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let endPoint = touches.first?.location(in: imageView) else { return }
         
+    }
+    
+    func distanceBetween(p1: CGPoint, p2: CGPoint) -> Float {
+        return Float(abs(p2.x - p1.x)) + Float(abs(p2.y - p1.y))
     }
 
     

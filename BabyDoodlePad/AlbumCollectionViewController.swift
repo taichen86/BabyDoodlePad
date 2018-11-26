@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "AlbumCell"
 
-class AlbumCollectionViewController: UICollectionViewController {
+class AlbumCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var pictures : [Picture] = []
     
@@ -45,6 +45,12 @@ class AlbumCollectionViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
 
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/3-10, height: collectionView.frame.width/3-10)
+    }
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -57,11 +63,18 @@ class AlbumCollectionViewController: UICollectionViewController {
         // #warning Incomplete implementation, return the number of items
         return pictures.count
     }
+    
+    
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AlbumCell
         cell.parentView = self
         cell.index = indexPath.row
+        /*
+        print(collectionView.frame.width)
+        
+        cell.frame.size = CGSize(width: collectionView.frame.width/3, height: collectionView.frame.width/3)
+        print(cell.frame.size)*/
         let picture = pictures[indexPath.row]
         if let imageData = picture.image {
             cell.imageView.image = UIImage(data: imageData)
@@ -73,13 +86,21 @@ class AlbumCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AlbumCell
+        cell.layer.borderWidth = 10
+        cell.layer.cornerRadius = 10
+        cell.layer.borderColor = Palette.colors[Int(arc4random_uniform(4))].cgColor
         cell.showOptions(true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AlbumCell
+        cell.layer.borderWidth = 0
         cell.showOptions(false)
     }
+    
+
+    
+
 
 }
 

@@ -12,6 +12,7 @@ enum DrawMode {
     case standard
     case rainbow
     case sticker
+    case particles
 }
 
 
@@ -20,33 +21,63 @@ class DrawingViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var brushStackWidth: NSLayoutConstraint!
     @IBOutlet weak var leftOptionsStackWidth: NSLayoutConstraint!
+    @IBOutlet weak var effectsStackWidth: NSLayoutConstraint!
     
     var lastPoint = CGPoint(x: 0, y: 0)
     var currentColor = UIColor.white.cgColor
     var currentColorIndex = 0
     
     var drawMode = DrawMode.standard
-    var currentSticker : Int = 0
+    var currentLeftOption : Int = 1 // stickers , effects
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        effectTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runEffectTimer), userInfo: nil, repeats: true)
+    //    effectTimer.invalidate()
+        emitter.emitterShape = kCAEmitterLayerRectangle
+        emitter.position = CGPoint(x: imageView.frame.width/2, y: -10)
+        emitter.emitterCells = [makeEmitterCell()]
+        emitter.birthRate = 0
+        print(emitter)
+        imageView.layer.addSublayer(emitter)
+   //     effectTimer.invalidate()
     }
 
-    
+    @objc func runEffectTimer() {
+        effectTime -= 1
+        print("timer \(effectTime)")
+        if effectTime < 0 {
+            emitter.birthRate = 0
+            print("stop emission")
+        }
+    }
     // MARK: left panel buttons
-
+    @IBAction func newOptionPressed(_ sender: UIButton) {
+        imageView.image = nil
+    }
+    
     @IBAction func stickerOptionPressed(_ sender: UIButton) {
         drawMode = .sticker
         toggleLeftOptionsStack()
     }
     
+    @IBAction func effectsOptionPressed(_ sender: UIButton) {
+        drawMode = .particles
+     toggleEffectsStack()
+    }
+    
+
     func toggleLeftOptionsStack() {
-        leftOptionsStackWidth.constant = (leftOptionsStackWidth.constant == CGFloat(0)) ? 80 : 0
+        leftOptionsStackWidth.constant = (leftOptionsStackWidth.constant == CGFloat(0)) ? 120 : 0
+    }
+    
+    func toggleEffectsStack() {
+        effectsStackWidth.constant = (effectsStackWidth.constant == CGFloat(0)) ? 120 : 0
     }
     
     @IBAction func leftOptionPressed(_ sender: UIButton) {
-        currentSticker = sender.tag
+        currentLeftOption = sender.tag
     }
     
     @IBAction func saveOptionPressed(_ sender: UIButton) {
@@ -58,20 +89,20 @@ class DrawingViewController: UIViewController {
                 print("saving...")
                 picture.image = UIImageJPEGRepresentation(image, 1)
                 (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+                performSegue(withIdentifier: "goToAlbum", sender: self)
             }
-             
         }
     }
     
-    @IBAction func deleteOptionPressed(_ sender: UIButton) {
-        imageView.image = nil
+    @IBAction func photoOptionPressed(_ sender: UIButton) {
+        importPhoto()
     }
     
-    // MARK: right panel buttons
     
+
+    // MARK: right panel buttons
     @IBAction func brushOptionsPressed(_ sender: UIButton) {
         drawMode = .standard
-    //    toggleBrushPanel()
     }
 
     func toggleBrushPanel() {
@@ -83,13 +114,13 @@ class DrawingViewController: UIViewController {
         currentColor = Palette.colors[currentColorIndex].cgColor
         drawMode = .standard
     }
+    
     @IBAction func rainbowPressed(_ sender: UIButton) {
         drawMode = .rainbow
     }
+ 
     
-  
     // MARK: touch events
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let beginPoint = touches.first?.location(in: imageView) else { return }
         lastPoint = beginPoint
@@ -98,16 +129,16 @@ class DrawingViewController: UIViewController {
         
         switch drawMode {
         case .sticker:
-            animateSticker(p1: lastPoint)
-            placeSticker(p1: lastPoint)
+            animateSticker(p1: lastPoint, "sticker\(currentLeftOption).png")
+            placeSticker(p1: lastPoint, "sticker\(currentLeftOption).png")
         case .rainbow:
             colorChangedAt = beginPoint
+        case .particles:
+            doEffect(p1: lastPoint)
         default:
             break
         }
-        
- 
-        
+    
     }
     
     var colorChangedAt = CGPoint.zero
@@ -128,7 +159,7 @@ class DrawingViewController: UIViewController {
             break
             
         }
-                
+        
         lastPoint = movedPoint
     }
     
@@ -159,17 +190,17 @@ class DrawingViewController: UIViewController {
     }
     
     // MARK: sticker
-    func placeSticker(p1: CGPoint) {
+    func placeSticker(p1: CGPoint , _ stickerName : String) {
         let size = CGSize(width: imageView.frame.size.width, height: imageView.frame.size.height)
         UIGraphicsBeginImageContext(size)
         imageView.image?.draw(in: CGRect(origin: CGPoint.zero, size: size))
-        UIImage(named: "sticker01.png")!.draw(in: CGRect(origin: CGPoint(x: p1.x-32, y: p1.y-32), size: CGSize(width: 64, height: 64)))
+        UIImage(named: stickerName)!.draw(in: CGRect(origin: CGPoint(x: p1.x-32, y: p1.y-32), size: CGSize(width: 64, height: 64)))
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
-    func animateSticker(p1: CGPoint) {
-        let image = UIImage(named: "sticker01.png")!
+    func animateSticker(p1: CGPoint , _ stickerName: String) {
+        let image = UIImage(named: stickerName)!
         let imageView = UIImageView(image: image)
         let startSize : CGFloat = 100
         let endSize : CGFloat = 64
@@ -184,9 +215,58 @@ class DrawingViewController: UIViewController {
         }) { (complete) in
             imageView.removeFromSuperview()
         }
-        
+
+    }
+    
+    // MARK: particles
+    let emitter = CAEmitterLayer()
+    let cell = CAEmitterCell()
+    var effectTime : Float = 0
+
+    var effectTimer = Timer()
+    
+    func doEffect(p1: CGPoint) {
+        animateSticker(p1: p1 , "effect\(currentLeftOption).png")
+        placeSticker(p1: p1 , "effect\(currentLeftOption).png")
+   //     effectTimer.fire()
+        emitter.birthRate = 1
+        effectTime = 4
         
         
     }
+    
+    
+    func makeEmitterCell() -> CAEmitterCell {
+        cell.scale = 0.2
+        cell.birthRate = 1
+        cell.lifetime = 10
+        cell.velocity = 170
+        cell.alphaRange = 0.5
+        cell.emissionLongitude = CGFloat.pi/2
+        cell.emissionRange = CGFloat.pi / 3
+        cell.contents = UIImage(named: "effect\(currentLeftOption).png")!.cgImage
+        return cell
+    }
+    
 
+
+}
+
+extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func importPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil )
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let photo = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageView.image = photo // TODO: crop to fit
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

@@ -11,11 +11,11 @@ import UIKit
 
 class Palette {
     
-    static let colors = [UIColor(red: 85.0/255.0, green: 239.0/255.0, blue: 196.0/255.0, alpha: 1.0),
-    UIColor(red: 116.0/255.0, green: 185.0/255.0, blue: 255.0/255.0, alpha: 1.0),
-    UIColor(red: 214.0/255.0, green: 48.0/255.0, blue: 49.0/255.0, alpha: 1.0),
-    UIColor(red: 255.0/255.0, green: 234.0/255.0, blue: 167.0/255.0, alpha: 1.0),
-    UIColor(red: 255.0/255.0, green: 118.0/255.0, blue: 117.0/255.0, alpha: 1.0)
+    static let colors = [UIColor(red: 207.0/255.0, green: 255.0/255.0, blue: 238.0/255.0, alpha: 1.0),
+    UIColor(red: 194.0/255.0, green: 255.0/255.0, blue: 191.0/255.0, alpha: 1.0),
+    UIColor(red: 253.0/255.0, green: 255.0/255.0, blue: 195.0/255.0, alpha: 1.0),
+    UIColor(red: 255.0/255.0, green: 194.0/255.0, blue: 187.0/255.0, alpha: 1.0),
+    UIColor(red: 245.0/255.0, green: 225.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     ]
     /*
     green 

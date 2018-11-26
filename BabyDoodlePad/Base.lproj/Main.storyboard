@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,141 +20,317 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qwX-0j-Chl">
-                                <rect key="frame" x="80" y="0.0" width="507" height="375"/>
+                                <rect key="frame" x="120" y="0.0" width="467" height="632"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="G9q-5Q-VQJ" userLabel="Left Stack">
-                                <rect key="frame" x="0.0" y="32" width="80" height="343"/>
+                                <rect key="frame" x="0.0" y="32" width="120" height="600"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W34-eu-PzG" userLabel="Stickers">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="68.5"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="sticker01"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W34-eu-PzG" userLabel="New">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        <color key="backgroundColor" red="1" green="0.98530367111102357" blue="0.8636608540205013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="W34-eu-PzG" secondAttribute="height" multiplier="1:1" id="9B4-Q0-TUf"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" image="new"/>
                                         <connections>
-                                            <action selector="stickerOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8fG-PK-B6I"/>
+                                            <action selector="newOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZGL-bx-XmW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Njd-5C-DZP" userLabel="Backgrounds">
-                                        <rect key="frame" x="0.0" y="68.5" width="80" height="68.5"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBV-OY-Yfc" userLabel="Effects">
-                                        <rect key="frame" x="0.0" y="137" width="80" height="69"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cB-mI-8Xb">
-                                        <rect key="frame" x="0.0" y="206" width="80" height="68.5"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Album"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Njd-5C-DZP" userLabel="Stickers">
+                                        <rect key="frame" x="0.0" y="120" width="120" height="120"/>
+                                        <color key="backgroundColor" red="1" green="0.98530367111102357" blue="0.8636608540205013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Njd-5C-DZP" secondAttribute="height" multiplier="1:1" id="jTa-g8-Vol"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="30" minY="30" maxX="30" maxY="30"/>
+                                        <state key="normal" image="sticker1"/>
                                         <connections>
-                                            <segue destination="XcK-aX-cFn" kind="show" identifier="goToAlbum" id="mtl-53-Nth"/>
+                                            <action selector="stickerOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kJP-Vo-ZJt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ny-da-VEh" userLabel="Save">
-                                        <rect key="frame" x="0.0" y="274.5" width="80" height="68.5"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Save"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBV-OY-Yfc" userLabel="Effects">
+                                        <rect key="frame" x="0.0" y="240" width="120" height="120"/>
+                                        <color key="backgroundColor" red="1" green="0.98530367111102357" blue="0.8636608540205013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="zBV-OY-Yfc" secondAttribute="height" multiplier="1:1" id="G2G-Yv-FI7"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="30" minY="30" maxX="30" maxY="30"/>
+                                        <state key="normal" image="effect1"/>
+                                        <connections>
+                                            <action selector="effectsOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0CT-UG-OJz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cB-mI-8Xb" userLabel="Photo">
+                                        <rect key="frame" x="0.0" y="360" width="120" height="120"/>
+                                        <color key="backgroundColor" red="1" green="0.98530367111102357" blue="0.8636608540205013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6cB-mI-8Xb" secondAttribute="height" multiplier="1:1" id="QXF-s0-hIZ"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" image="photo"/>
+                                        <connections>
+                                            <action selector="photoOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sa8-Ey-XGN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ny-da-VEh" userLabel="Save">
+                                        <rect key="frame" x="0.0" y="480" width="120" height="120"/>
+                                        <color key="backgroundColor" red="1" green="0.98530367111102357" blue="0.8636608540205013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="4ny-da-VEh" secondAttribute="height" multiplier="1:1" id="zQu-bF-rxT"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" image="diskette"/>
                                         <connections>
                                             <action selector="saveOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VbY-ll-fFY"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94177646835588091" green="0.94671655702029911" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="OWO-GZ-9KQ"/>
+                                    <constraint firstAttribute="width" constant="120" id="OWO-GZ-9KQ"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="nje-Vs-peV" userLabel="Left Options Stack">
-                                <rect key="frame" x="80" y="32" width="0.0" height="343"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdM-bH-2hk" userLabel="Stickers Scroll">
+                                <rect key="frame" x="120" y="32" width="0.0" height="600"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dV-6r-N2z" userLabel="Option01">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="114.5"/>
-                                        <state key="normal" image="sticker01"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="nje-Vs-peV" userLabel="Stickers Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="1000.5"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6a-Uc-DVa" userLabel="Option01">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="gwv-AP-DRg"/>
+                                                    <constraint firstAttribute="height" constant="100" id="k2d-Ni-Hjt"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="sticker1"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d8a-q9-C3n"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vte-sj-jRw" userLabel="Option02">
+                                                <rect key="frame" x="0.0" y="100" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Tso-g3-akx"/>
+                                                    <constraint firstAttribute="height" constant="100" id="lUf-mi-irZ"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="sticker2"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Olx-U2-hzs"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bS-mn-Rki" userLabel="Option03">
+                                                <rect key="frame" x="0.0" y="200" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="86z-zt-ovO"/>
+                                                    <constraint firstAttribute="height" constant="100" id="zqq-Qj-UvG"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="sticker3"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HvG-J7-5ke"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dV-6r-N2z" userLabel="Option04">
+                                                <rect key="frame" x="0.0" y="300" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="e3F-mO-9oT"/>
+                                                    <constraint firstAttribute="height" constant="100" id="xhI-q2-b9v"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="24" minY="24" maxX="24" maxY="24"/>
+                                                <state key="normal" image="sticker4"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEC-7f-7Vd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJT-UO-4sC" userLabel="Option05">
+                                                <rect key="frame" x="0.0" y="400" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="8aS-EK-YI4"/>
+                                                    <constraint firstAttribute="width" constant="100" id="Xlp-Ss-zrp"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="22" minY="22" maxX="22" maxY="22"/>
+                                                <state key="normal" image="sticker5"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Vw-iA-eHm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="6" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIt-9n-uP7" userLabel="Option06">
+                                                <rect key="frame" x="0.0" y="500" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="2Ck-KZ-L2A"/>
+                                                    <constraint firstAttribute="width" constant="100" id="iJ5-ou-lPW"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="sticker6"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7C4-VA-rFv"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="7" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRq-oZ-U4W" userLabel="Option07">
+                                                <rect key="frame" x="0.0" y="600" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Dki-MF-Bly"/>
+                                                    <constraint firstAttribute="height" constant="100" id="zU0-b4-gzc"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="sticker7"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B35-jB-bs5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="8" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CdO-cZ-VSg" userLabel="Option08">
+                                                <rect key="frame" x="0.0" y="700" width="100" height="100.5"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="eUJ-Nd-SxR"/>
+                                                    <constraint firstAttribute="width" constant="100" id="zkR-G8-qjK"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="sticker8"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y88-fH-QRY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="9" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9u-fX-JJH" userLabel="Option09">
+                                                <rect key="frame" x="0.0" y="800.5" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="B63-rq-DYv"/>
+                                                    <constraint firstAttribute="width" constant="100" id="jUn-A8-TEU"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="sticker9"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a2f-68-F9K"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="10" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dz-aM-w3U" userLabel="Option10">
+                                                <rect key="frame" x="0.0" y="900.5" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.9837258680998956" blue="0.92952438645562196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="do7-lz-TWC"/>
+                                                    <constraint firstAttribute="width" constant="100" id="p5V-Za-3B6"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="sticker10"/>
+                                                <connections>
+                                                    <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WYF-8x-Dhp"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nje-Vs-peV" firstAttribute="top" secondItem="qdM-bH-2hk" secondAttribute="top" id="8wS-mh-Lcb"/>
+                                    <constraint firstItem="nje-Vs-peV" firstAttribute="leading" secondItem="qdM-bH-2hk" secondAttribute="leading" id="CZf-Vi-L29"/>
+                                    <constraint firstAttribute="bottom" secondItem="nje-Vs-peV" secondAttribute="bottom" id="DlK-n7-d8B"/>
+                                    <constraint firstAttribute="width" id="Vie-iZ-WHJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="nje-Vs-peV" secondAttribute="trailing" id="rkt-nu-Xbg"/>
+                                </constraints>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="F9q-j0-XH1" userLabel="Effects Stack">
+                                <rect key="frame" x="120" y="32" width="0.0" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QB5-54-11t" userLabel="Snow">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="235"/>
+                                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="effect1"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEC-7f-7Vd"/>
+                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5pH-EH-O41"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJT-UO-4sC" userLabel="Option02">
-                                        <rect key="frame" x="0.0" y="114.5" width="0.0" height="114"/>
-                                        <state key="normal" image="sticker02"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUF-Ak-8i0" userLabel="Star">
+                                        <rect key="frame" x="0.0" y="235" width="0.0" height="243"/>
+                                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="effect2"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Vw-iA-eHm"/>
+                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PQD-uU-2lb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CdO-cZ-VSg" userLabel="Option03">
-                                        <rect key="frame" x="0.0" y="228.5" width="0.0" height="114.5"/>
-                                        <state key="normal" image="sticker01"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIZ-lY-vDl" userLabel="Bubbles">
+                                        <rect key="frame" x="0.0" y="478" width="0.0" height="122"/>
+                                        <state key="normal" image="effect3"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y88-fH-QRY"/>
+                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7jM-uj-1Rc"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" id="k6w-dH-R8R"/>
+                                    <constraint firstAttribute="width" id="jr9-xo-v70"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="km9-7H-7lD" userLabel="Colors Stack">
-                                <rect key="frame" x="587" y="32" width="80" height="343"/>
+                                <rect key="frame" x="587" y="32" width="80" height="600"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFg-yN-xnH" userLabel="Delete">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="34"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFg-yN-xnH">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="66"/>
+                                        <state key="normal" title="Eraser"/>
                                         <connections>
-                                            <action selector="deleteOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z0I-Gw-Al1"/>
+                                            <action selector="rainbowPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fi4-4x-57W"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uej-ln-DWN" userLabel="Brush">
-                                        <rect key="frame" x="0.0" y="44" width="80" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="76" width="80" height="66.5"/>
                                         <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="BRUSH"/>
                                         <connections>
                                             <action selector="brushOptionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="td0-AX-oiw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUB-eM-WtY">
-                                        <rect key="frame" x="0.0" y="88.5" width="80" height="34"/>
-                                        <color key="backgroundColor" red="0.691563763332109" green="1" blue="0.71258180918781622" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUB-eM-WtY" userLabel="Blue">
+                                        <rect key="frame" x="0.0" y="152.5" width="80" height="66.5"/>
+                                        <color key="backgroundColor" red="0.81176470588235294" green="1" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.69243486496023721" green="0.59655757346679883" blue="0.83531706470355327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Green" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLU-b8-TbI"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hz-fh-Wbw" userLabel="Blue">
-                                        <rect key="frame" x="0.0" y="132.5" width="80" height="34"/>
-                                        <color key="backgroundColor" red="0.75574867345429775" green="1" blue="0.99297739741418367" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hz-fh-Wbw" userLabel="Green">
+                                        <rect key="frame" x="0.0" y="229" width="80" height="66"/>
+                                        <color key="backgroundColor" red="0.7603346889" green="1" blue="0.74730749259999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Blue" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2bK-x2-fkB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtZ-FM-OuT" userLabel="Pink">
-                                        <rect key="frame" x="0.0" y="176.5" width="80" height="34"/>
-                                        <color key="backgroundColor" red="1" green="0.84646307653091823" blue="0.99365110215528196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtZ-FM-OuT" userLabel="Yellow">
+                                        <rect key="frame" x="0.0" y="305" width="80" height="66.5"/>
+                                        <color key="backgroundColor" red="0.99156989559999997" green="1" blue="0.76617944800000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Pink" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HTi-rs-Cu4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLy-LJ-TWG" userLabel="Yellow">
-                                        <rect key="frame" x="0.0" y="220.5" width="80" height="34.5"/>
-                                        <color key="backgroundColor" red="1" green="0.99112020258572964" blue="0.75566187762873271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLy-LJ-TWG" userLabel="Red">
+                                        <rect key="frame" x="0.0" y="381.5" width="80" height="66"/>
+                                        <color key="backgroundColor" red="1" green="0.76019835101796907" blue="0.73198191933039469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Yellow" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o7D-uu-YQv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5M-P9-sGy" userLabel="Red">
-                                        <rect key="frame" x="0.0" y="265" width="80" height="34"/>
-                                        <color key="backgroundColor" red="1" green="0.74940092605857034" blue="0.71238934027510559" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5M-P9-sGy" userLabel="Purple">
+                                        <rect key="frame" x="0.0" y="457.5" width="80" height="66.5"/>
+                                        <color key="backgroundColor" red="0.96126061059772405" green="0.88355742054595787" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Red" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8VP-uZ-gW2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFf-Ji-foV" userLabel="Rainbow">
-                                        <rect key="frame" x="0.0" y="309" width="80" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFf-Ji-foV" userLabel="Rainbow">
+                                        <rect key="frame" x="0.0" y="534" width="80" height="66"/>
                                         <color key="backgroundColor" red="1" green="0.94202611606641096" blue="0.97967742867147689" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Rainbow" image="splat"/>
                                         <connections>
@@ -166,21 +343,21 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ttk-Yi-vgh" userLabel="Brushes Stack">
-                                <rect key="frame" x="587" y="32" width="0.0" height="343"/>
+                                <rect key="frame" x="587" y="32" width="0.0" height="600"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yx3-ZQ-Iw9" userLabel="Blue">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="283"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="540"/>
                                         <state key="normal" title="Brush 1"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXp-q4-Jos" userLabel="Brush">
-                                        <rect key="frame" x="0.0" y="283" width="0.0" height="30"/>
+                                        <rect key="frame" x="0.0" y="540" width="0.0" height="30"/>
                                         <state key="normal" title="brush 2"/>
                                         <connections>
                                             <action selector="brushOptionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S8M-bx-6hs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njw-DJ-D1H">
-                                        <rect key="frame" x="0.0" y="313" width="0.0" height="30"/>
+                                        <rect key="frame" x="0.0" y="570" width="0.0" height="30"/>
                                         <state key="normal" title="brush 3"/>
                                     </button>
                                 </subviews>
@@ -191,63 +368,73 @@
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nje-Vs-peV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8fE-s7-6ho"/>
+                            <constraint firstItem="qdM-bH-2hk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3HN-Vh-JIj"/>
+                            <constraint firstItem="qdM-bH-2hk" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="5LV-Hm-Lxp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ttk-Yi-vgh" secondAttribute="bottom" id="Dlr-hX-WMs"/>
-                            <constraint firstItem="nje-Vs-peV" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="GDO-Zh-VGW"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Int-6R-vnl"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Mlq-yp-T2I"/>
+                            <constraint firstItem="F9q-j0-XH1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NkO-V6-ZWC"/>
                             <constraint firstItem="Ttk-Yi-vgh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OF4-Ie-42p"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="OPY-su-fyX"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ReH-JL-Nfk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nje-Vs-peV" secondAttribute="bottom" id="Ztv-PX-HSh"/>
                             <constraint firstItem="G9q-5Q-VQJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bko-Zx-nfc"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="cet-c1-725"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="G9q-5Q-VQJ" secondAttribute="bottom" id="cvq-NW-S7q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qdM-bH-2hk" secondAttribute="bottom" id="drI-Cz-1rL"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="g4e-dI-Kad"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="leading" secondItem="qwX-0j-Chl" secondAttribute="trailing" id="oAr-Zf-zTh"/>
                             <constraint firstItem="G9q-5Q-VQJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qzA-r0-9YY"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="leading" secondItem="Ttk-Yi-vgh" secondAttribute="trailing" id="tEX-MH-qgI"/>
+                            <constraint firstItem="F9q-j0-XH1" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="wab-PG-f63"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="F9q-j0-XH1" secondAttribute="bottom" id="x8q-Hs-Vwr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nir-RJ-Ohh"/>
+                    <navigationItem key="navigationItem" id="nir-RJ-Ohh">
+                        <barButtonItem key="rightBarButtonItem" title="Album" id="azu-Uj-fPn">
+                            <connections>
+                                <segue destination="XcK-aX-cFn" kind="show" identifier="goToAlbum" id="Yy2-B1-WYw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="brushStackWidth" destination="f7f-fy-PHn" id="Yvy-k2-gzw"/>
+                        <outlet property="effectsStackWidth" destination="jr9-xo-v70" id="5hx-gk-wnc"/>
                         <outlet property="imageView" destination="qwX-0j-Chl" id="XPt-5R-kny"/>
-                        <outlet property="leftOptionsStackWidth" destination="k6w-dH-R8R" id="jkl-fZ-xid"/>
+                        <outlet property="leftOptionsStackWidth" destination="Vie-iZ-WHJ" id="oBN-G2-K36"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="443.92803598200902" y="98.400000000000006"/>
         </scene>
-        <!--Album Collection View Controller-->
+        <!--Artworks-->
         <scene sceneID="0A4-x2-8PI">
             <objects>
-                <collectionViewController id="XcK-aX-cFn" customClass="AlbumCollectionViewController" customModule="BabyDoodlePad" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="Artworks" id="XcK-aX-cFn" customClass="AlbumCollectionViewController" customModule="BabyDoodlePad" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oFV-jd-mPV">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BLM-WE-O7o">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="256" height="256"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlbumCell" id="nMf-oo-zw8" customClass="AlbumCell" customModule="BabyDoodlePad" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0U8-vu-cX0" userLabel="Image">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                                         </imageView>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-zP-XZl" userLabel="Delete">
-                                            <rect key="frame" x="100" y="100" width="24" height="24"/>
+                                            <rect key="frame" x="228" y="228" width="24" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="LIF-Gg-9Pr"/>
                                                 <constraint firstAttribute="height" constant="24" id="iOk-xm-GH4"/>
@@ -303,8 +490,22 @@
         </scene>
     </scenes>
     <resources>
+        <image name="diskette" width="64" height="64"/>
+        <image name="effect1" width="266" height="235"/>
+        <image name="effect2" width="243" height="243"/>
+        <image name="effect3" width="1024" height="1024"/>
+        <image name="new" width="64" height="64"/>
+        <image name="photo" width="64" height="64"/>
         <image name="splat" width="265" height="222"/>
-        <image name="sticker01" width="128" height="128"/>
-        <image name="sticker02" width="512" height="512"/>
+        <image name="sticker1" width="128" height="128"/>
+        <image name="sticker10" width="256" height="256"/>
+        <image name="sticker2" width="512" height="512"/>
+        <image name="sticker3" width="128" height="128"/>
+        <image name="sticker4" width="64" height="64"/>
+        <image name="sticker5" width="64" height="64"/>
+        <image name="sticker6" width="128" height="128"/>
+        <image name="sticker7" width="128" height="128"/>
+        <image name="sticker8" width="128" height="128"/>
+        <image name="sticker9" width="128" height="128"/>
     </resources>
 </document>

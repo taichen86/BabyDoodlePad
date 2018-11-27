@@ -246,7 +246,7 @@
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="effect1"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5pH-EH-O41"/>
+                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaW-cs-eKb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUF-Ak-8i0" userLabel="Star">
@@ -254,14 +254,14 @@
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="effect2"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PQD-uU-2lb"/>
+                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jLI-uy-Oxw"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIZ-lY-vDl" userLabel="Bubbles">
                                         <rect key="frame" x="0.0" y="478" width="0.0" height="122"/>
                                         <state key="normal" image="effect3"/>
                                         <connections>
-                                            <action selector="leftOptionPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7jM-uj-1Rc"/>
+                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yss-Zm-EiX"/>
                                         </connections>
                                     </button>
                                 </subviews>

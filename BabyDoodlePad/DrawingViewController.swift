@@ -33,25 +33,14 @@ class DrawingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        effectTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runEffectTimer), userInfo: nil, repeats: true)
-    //    effectTimer.invalidate()
-        emitter.emitterShape = kCAEmitterLayerRectangle
-        emitter.position = CGPoint(x: imageView.frame.width/2, y: -10)
-        emitter.emitterCells = [makeEmitterCell()]
-        emitter.birthRate = 0
-        print(emitter)
-        imageView.layer.addSublayer(emitter)
-   //     effectTimer.invalidate()
+        Audio.playAudioFile("bgtrack")
+
+        createSnowEmitter()
+        createBubbleEmitter()
+        
     }
 
-    @objc func runEffectTimer() {
-        effectTime -= 1
-        print("timer \(effectTime)")
-        if effectTime < 0 {
-            emitter.birthRate = 0
-            print("stop emission")
-        }
-    }
+
     // MARK: left panel buttons
     @IBAction func newOptionPressed(_ sender: UIButton) {
         imageView.image = nil
@@ -79,6 +68,12 @@ class DrawingViewController: UIViewController {
     @IBAction func leftOptionPressed(_ sender: UIButton) {
         currentLeftOption = sender.tag
     }
+    
+    var effectType = 0 // 1 - snow , 2 - bubbles
+    @IBAction func effectSelected(_ sender: UIButton) {
+        effectType = sender.tag
+    }
+    
     
     @IBAction func saveOptionPressed(_ sender: UIButton) {
         print("save image...")
@@ -134,7 +129,9 @@ class DrawingViewController: UIViewController {
         case .rainbow:
             colorChangedAt = beginPoint
         case .particles:
-            doEffect(p1: lastPoint)
+            animateSticker(p1: lastPoint, "effect\(effectType).png")
+            placeSticker(p1: lastPoint, "effect\(effectType).png")
+            doEffect()
         default:
             break
         }
@@ -219,38 +216,106 @@ class DrawingViewController: UIViewController {
     }
     
     // MARK: particles
-    let emitter = CAEmitterLayer()
-    let cell = CAEmitterCell()
-    var effectTime : Float = 0
-
-    var effectTimer = Timer()
     
-    func doEffect(p1: CGPoint) {
-        animateSticker(p1: p1 , "effect\(currentLeftOption).png")
-        placeSticker(p1: p1 , "effect\(currentLeftOption).png")
-   //     effectTimer.fire()
-        emitter.birthRate = 1
-        effectTime = 4
-        
+    func doEffect() {
+    //    print("do effect \(effectType)")
+        switch effectType{
+        case 1:
+            snowTimeRemaining = 2
+            if snowEffectRunning { break }
+            snowEffectRunning = true
+            createSnowTimer()
+            snowEmitter.birthRate = 1
+        case 2:
+            bubbleTimeRemaining = 2
+            if bubbleEffectRunning { break }
+            bubbleEffectRunning = true
+            createBubbleTimer()
+            bubbleEmitter.birthRate = 1
+        default:
+            break
+        }
         
     }
     
     
-    func makeEmitterCell() -> CAEmitterCell {
+    
+
+    
+    
+    // ------- SNOW --------------------------
+    var snowTimeRemaining : Float = 0
+    var snowEffectRunning = false
+
+    var snowTimer = Timer()
+    func createSnowTimer() {
+        snowTimer = Timer.scheduledTimer(timeInterval: 0.9, target: self, selector: #selector(runSnowTimer), userInfo: nil, repeats: true)
+    }
+    @objc func runSnowTimer() {
+        snowTimeRemaining -= 1
+        if snowTimeRemaining < 0 {
+            snowEmitter.birthRate = 0
+            snowTimer.invalidate()
+            snowEffectRunning = false
+        }
+    }
+    
+    var snowEmitter = CAEmitterLayer()
+    func createSnowEmitter() {
+        snowEmitter.emitterShape = kCAEmitterLayerRectangle
+        snowEmitter.position = CGPoint(x: imageView.frame.width/2, y: -50)
+        snowEmitter.emitterSize = CGSize(width: imageView.frame.width, height: 10)
+        snowEmitter.birthRate = 0
+        let cell = CAEmitterCell()
         cell.scale = 0.2
-        cell.birthRate = 1
+        cell.birthRate = 2
         cell.lifetime = 10
         cell.velocity = 170
         cell.alphaRange = 0.5
         cell.emissionLongitude = CGFloat.pi/2
         cell.emissionRange = CGFloat.pi / 3
-        cell.contents = UIImage(named: "effect\(currentLeftOption).png")!.cgImage
-        return cell
+        cell.contents = UIImage(named: "effect1.png")!.cgImage
+        snowEmitter.emitterCells = [cell]
+        imageView.layer.addSublayer(snowEmitter)
     }
     
+    // ------- BUBBLES --------------------------
+    var bubbleTimeRemaining : Float = 0
+    var bubbleEffectRunning = false
+    var bubbleTimer = Timer()
+    func createBubbleTimer() {
+        bubbleTimer = Timer.scheduledTimer(timeInterval: 1.1, target: self, selector: #selector(runBubbleTimer), userInfo: nil, repeats: true)
+    }
+    @objc func runBubbleTimer() {
+        bubbleTimeRemaining -= 1
+        if bubbleTimeRemaining < 0 {
+            bubbleEmitter.birthRate = 0
+            bubbleTimer.invalidate()
+            bubbleEffectRunning = false
+        }
+    }
+    var bubbleEmitter = CAEmitterLayer()
+    func createBubbleEmitter() {
+        bubbleEmitter.emitterShape = kCAEmitterLayerLine
+        bubbleEmitter.position = CGPoint(x: imageView.frame.width/2, y: imageView.frame.height+50)
+        bubbleEmitter.emitterSize = CGSize(width: imageView.frame.width, height: 10)
+        bubbleEmitter.birthRate = 0
+        let cell = CAEmitterCell()
+        cell.scale = 0.2
+        cell.birthRate = 1
+        cell.lifetime = 3
+        cell.velocity = 100
+        cell.alphaRange = 0.5
+        cell.emissionLongitude = CGFloat.pi/2*3
+        cell.emissionRange = CGFloat.pi / 4
+        cell.contents = UIImage(named: "effect2.png")!.cgImage
+        bubbleEmitter.emitterCells = [cell]
+        imageView.layer.addSublayer(bubbleEmitter)
+    }
 
 
 }
+
 
 extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

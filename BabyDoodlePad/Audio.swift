@@ -18,6 +18,7 @@ class Audio {
         print("play audio .. \(filename)")
         
         player = try? AVAudioPlayer(contentsOf: url)
+        player?.numberOfLoops = -1
         player?.play()
         
     }

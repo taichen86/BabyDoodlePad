@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qwX-0j-Chl">
-                                <rect key="frame" x="120" y="0.0" width="467" height="632"/>
+                                <rect key="frame" x="120" y="0.0" width="447" height="632"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="G9q-5Q-VQJ" userLabel="Left Stack">
                                 <rect key="frame" x="0.0" y="32" width="120" height="600"/>
@@ -238,59 +238,98 @@
                                     <constraint firstAttribute="trailing" secondItem="nje-Vs-peV" secondAttribute="trailing" id="rkt-nu-Xbg"/>
                                 </constraints>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="F9q-j0-XH1" userLabel="Effects Stack">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLs-ks-mMH" userLabel="Effects Scroll">
                                 <rect key="frame" x="120" y="32" width="0.0" height="600"/>
                                 <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QB5-54-11t" userLabel="Snow">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="235"/>
-                                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="effect1"/>
-                                        <connections>
-                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaW-cs-eKb"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUF-Ak-8i0" userLabel="Star">
-                                        <rect key="frame" x="0.0" y="235" width="0.0" height="243"/>
-                                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="effect2"/>
-                                        <connections>
-                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jLI-uy-Oxw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIZ-lY-vDl" userLabel="Bubbles">
-                                        <rect key="frame" x="0.0" y="478" width="0.0" height="122"/>
-                                        <state key="normal" image="effect3"/>
-                                        <connections>
-                                            <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yss-Zm-EiX"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="F9q-j0-XH1" userLabel="Effects Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="400"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QB5-54-11t" userLabel="Snow">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="AfA-Xi-15F"/>
+                                                    <constraint firstAttribute="width" constant="100" id="etc-xe-U1w"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="effect1"/>
+                                                <connections>
+                                                    <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaW-cs-eKb"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUF-Ak-8i0" userLabel="Star">
+                                                <rect key="frame" x="0.0" y="100" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="S5D-SM-22c"/>
+                                                    <constraint firstAttribute="height" constant="100" id="WYH-VK-D8w"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="effect2"/>
+                                                <connections>
+                                                    <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jLI-uy-Oxw"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIZ-lY-vDl" userLabel="Bubbles">
+                                                <rect key="frame" x="0.0" y="200" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="LkK-fR-mU7"/>
+                                                    <constraint firstAttribute="height" constant="100" id="vJa-6S-uei"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" image="effect3"/>
+                                                <connections>
+                                                    <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yss-Zm-EiX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-SD-IlG" userLabel="Confetti">
+                                                <rect key="frame" x="0.0" y="300" width="100" height="100"/>
+                                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="pFn-7h-BYv"/>
+                                                    <constraint firstAttribute="width" constant="100" id="yJO-Rs-VVD"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
+                                                <state key="normal" title="Button" image="effect4"/>
+                                                <connections>
+                                                    <action selector="effectSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0cd-WJ-826"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" id="jr9-xo-v70"/>
+                                    <constraint firstItem="F9q-j0-XH1" firstAttribute="leading" secondItem="QLs-ks-mMH" secondAttribute="leading" id="L59-to-Cam"/>
+                                    <constraint firstAttribute="trailing" secondItem="F9q-j0-XH1" secondAttribute="trailing" id="VIt-Za-KWU"/>
+                                    <constraint firstAttribute="bottom" secondItem="F9q-j0-XH1" secondAttribute="bottom" id="mWC-UK-b1a"/>
+                                    <constraint firstItem="F9q-j0-XH1" firstAttribute="top" secondItem="QLs-ks-mMH" secondAttribute="top" id="qnk-1p-DA4"/>
+                                    <constraint firstAttribute="width" id="tO5-gM-mkc"/>
                                 </constraints>
-                            </stackView>
+                            </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="km9-7H-7lD" userLabel="Colors Stack">
-                                <rect key="frame" x="587" y="32" width="80" height="600"/>
+                                <rect key="frame" x="567" y="32" width="100" height="600"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFg-yN-xnH">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="66"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="66"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Eraser"/>
                                         <connections>
-                                            <action selector="rainbowPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fi4-4x-57W"/>
+                                            <action selector="eraserPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XwK-a1-vS2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uej-ln-DWN" userLabel="Brush">
-                                        <rect key="frame" x="0.0" y="76" width="80" height="66.5"/>
-                                        <color key="backgroundColor" red="1" green="0.91764705882352937" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="76" width="100" height="66.5"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="BRUSH"/>
                                         <connections>
                                             <action selector="brushOptionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="td0-AX-oiw"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUB-eM-WtY" userLabel="Blue">
-                                        <rect key="frame" x="0.0" y="152.5" width="80" height="66.5"/>
-                                        <color key="backgroundColor" red="0.81176470588235294" green="1" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="152.5" width="100" height="66.5"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.69243486496023721" green="0.59655757346679883" blue="0.83531706470355327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Green" image="splat"/>
                                         <connections>
@@ -298,71 +337,49 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hz-fh-Wbw" userLabel="Green">
-                                        <rect key="frame" x="0.0" y="229" width="80" height="66"/>
-                                        <color key="backgroundColor" red="0.7603346889" green="1" blue="0.74730749259999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="229" width="100" height="66"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Blue" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2bK-x2-fkB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtZ-FM-OuT" userLabel="Yellow">
-                                        <rect key="frame" x="0.0" y="305" width="80" height="66.5"/>
-                                        <color key="backgroundColor" red="0.99156989559999997" green="1" blue="0.76617944800000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="305" width="100" height="66.5"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Pink" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HTi-rs-Cu4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLy-LJ-TWG" userLabel="Red">
-                                        <rect key="frame" x="0.0" y="381.5" width="80" height="66"/>
-                                        <color key="backgroundColor" red="1" green="0.76019835101796907" blue="0.73198191933039469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="381.5" width="100" height="66"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Yellow" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o7D-uu-YQv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5M-P9-sGy" userLabel="Purple">
-                                        <rect key="frame" x="0.0" y="457.5" width="80" height="66.5"/>
-                                        <color key="backgroundColor" red="0.96126061059772405" green="0.88355742054595787" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="457.5" width="100" height="66.5"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Red" image="splat"/>
                                         <connections>
                                             <action selector="colorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8VP-uZ-gW2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFf-Ji-foV" userLabel="Rainbow">
-                                        <rect key="frame" x="0.0" y="534" width="80" height="66"/>
-                                        <color key="backgroundColor" red="1" green="0.94202611606641096" blue="0.97967742867147689" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="534" width="100" height="66"/>
+                                        <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Rainbow" image="splat"/>
                                         <connections>
                                             <action selector="rainbowPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5fM-z6-g0A"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="1" green="0.98372586809999996" blue="0.92952438650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="7rl-H7-3Qf"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ttk-Yi-vgh" userLabel="Brushes Stack">
-                                <rect key="frame" x="587" y="32" width="0.0" height="600"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yx3-ZQ-Iw9" userLabel="Blue">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="540"/>
-                                        <state key="normal" title="Brush 1"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXp-q4-Jos" userLabel="Brush">
-                                        <rect key="frame" x="0.0" y="540" width="0.0" height="30"/>
-                                        <state key="normal" title="brush 2"/>
-                                        <connections>
-                                            <action selector="brushOptionsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S8M-bx-6hs"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njw-DJ-D1H">
-                                        <rect key="frame" x="0.0" y="570" width="0.0" height="30"/>
-                                        <state key="normal" title="brush 3"/>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" id="f7f-fy-PHn"/>
+                                    <constraint firstAttribute="width" constant="100" id="7rl-H7-3Qf"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -370,11 +387,8 @@
                         <constraints>
                             <constraint firstItem="qdM-bH-2hk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3HN-Vh-JIj"/>
                             <constraint firstItem="qdM-bH-2hk" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="5LV-Hm-Lxp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ttk-Yi-vgh" secondAttribute="bottom" id="Dlr-hX-WMs"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Int-6R-vnl"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Mlq-yp-T2I"/>
-                            <constraint firstItem="F9q-j0-XH1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NkO-V6-ZWC"/>
-                            <constraint firstItem="Ttk-Yi-vgh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OF4-Ie-42p"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="OPY-su-fyX"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ReH-JL-Nfk"/>
                             <constraint firstItem="G9q-5Q-VQJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bko-Zx-nfc"/>
@@ -382,11 +396,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="G9q-5Q-VQJ" secondAttribute="bottom" id="cvq-NW-S7q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qdM-bH-2hk" secondAttribute="bottom" id="drI-Cz-1rL"/>
                             <constraint firstItem="qwX-0j-Chl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="g4e-dI-Kad"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QLs-ks-mMH" secondAttribute="bottom" id="h7W-jv-Hq8"/>
+                            <constraint firstItem="QLs-ks-mMH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iLc-PJ-7OV"/>
+                            <constraint firstItem="QLs-ks-mMH" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="nWU-p0-Rif"/>
                             <constraint firstItem="km9-7H-7lD" firstAttribute="leading" secondItem="qwX-0j-Chl" secondAttribute="trailing" id="oAr-Zf-zTh"/>
                             <constraint firstItem="G9q-5Q-VQJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qzA-r0-9YY"/>
-                            <constraint firstItem="km9-7H-7lD" firstAttribute="leading" secondItem="Ttk-Yi-vgh" secondAttribute="trailing" id="tEX-MH-qgI"/>
-                            <constraint firstItem="F9q-j0-XH1" firstAttribute="leading" secondItem="G9q-5Q-VQJ" secondAttribute="trailing" id="wab-PG-f63"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="F9q-j0-XH1" secondAttribute="bottom" id="x8q-Hs-Vwr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -398,8 +412,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="brushStackWidth" destination="f7f-fy-PHn" id="Yvy-k2-gzw"/>
-                        <outlet property="effectsStackWidth" destination="jr9-xo-v70" id="5hx-gk-wnc"/>
+                        <outlet property="effectsStackWidth" destination="tO5-gM-mkc" id="iYm-lU-9zm"/>
                         <outlet property="imageView" destination="qwX-0j-Chl" id="XPt-5R-kny"/>
                         <outlet property="leftOptionsStackWidth" destination="Vie-iZ-WHJ" id="oBN-G2-K36"/>
                     </connections>
@@ -491,21 +504,22 @@
     </scenes>
     <resources>
         <image name="diskette" width="64" height="64"/>
-        <image name="effect1" width="266" height="235"/>
-        <image name="effect2" width="243" height="243"/>
-        <image name="effect3" width="1024" height="1024"/>
+        <image name="effect1" width="128" height="128"/>
+        <image name="effect2" width="127" height="120"/>
+        <image name="effect3" width="64" height="64"/>
+        <image name="effect4" width="300" height="307"/>
         <image name="new" width="64" height="64"/>
         <image name="photo" width="64" height="64"/>
         <image name="splat" width="265" height="222"/>
-        <image name="sticker1" width="128" height="128"/>
+        <image name="sticker1" width="64" height="64"/>
         <image name="sticker10" width="256" height="256"/>
-        <image name="sticker2" width="512" height="512"/>
-        <image name="sticker3" width="128" height="128"/>
+        <image name="sticker2" width="64" height="64"/>
+        <image name="sticker3" width="64" height="64"/>
         <image name="sticker4" width="64" height="64"/>
         <image name="sticker5" width="64" height="64"/>
-        <image name="sticker6" width="128" height="128"/>
+        <image name="sticker6" width="256" height="256"/>
         <image name="sticker7" width="128" height="128"/>
-        <image name="sticker8" width="128" height="128"/>
+        <image name="sticker8" width="210" height="334"/>
         <image name="sticker9" width="128" height="128"/>
     </resources>
 </document>

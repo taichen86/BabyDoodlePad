@@ -11,6 +11,7 @@
 		091342B921AD16F500598923 /* bgtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 091342B821AD16F500598923 /* bgtrack.mp3 */; };
 		092E4E6121A802C1003316AD /* BabyDoodlePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E5F21A802C1003316AD /* BabyDoodlePad.xcdatamodeld */; };
 		092E4E6321A8107B003316AD /* AlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */; };
+		09B1985B21AD8772001A7929 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1985A21AD8772001A7929 /* ImageViewController.swift */; };
 		09BFB0B321A7133300CE4D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFB0B221A7133300CE4D8E /* AppDelegate.swift */; };
 		09BFB0B821A7133300CE4D8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09BFB0B621A7133300CE4D8E /* Main.storyboard */; };
 		09BFB0BA21A7133400CE4D8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BFB0B921A7133400CE4D8E /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		091342B821AD16F500598923 /* bgtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgtrack.mp3; sourceTree = "<group>"; };
 		092E4E6021A802C1003316AD /* BabyDoodlePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabyDoodlePad.xcdatamodel; sourceTree = "<group>"; };
 		092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		09B1985A21AD8772001A7929 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		09BFB0AF21A7133300CE4D8E /* BabyDoodlePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyDoodlePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BFB0B221A7133300CE4D8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09BFB0B721A7133300CE4D8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				09BFB0B221A7133300CE4D8E /* AppDelegate.swift */,
 				09BFB0C621A7139B00CE4D8E /* DrawingViewController.swift */,
 				092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */,
+				09B1985A21AD8772001A7929 /* ImageViewController.swift */,
 				09BFB0C821A724A500CE4D8E /* Palette.swift */,
 				091342B621AD144900598923 /* Audio.swift */,
 				09BFB0B621A7133300CE4D8E /* Main.storyboard */,
@@ -154,6 +157,7 @@
 				091342B721AD144900598923 /* Audio.swift in Sources */,
 				092E4E6321A8107B003316AD /* AlbumCollectionViewController.swift in Sources */,
 				092E4E6121A802C1003316AD /* BabyDoodlePad.xcdatamodeld in Sources */,
+				09B1985B21AD8772001A7929 /* ImageViewController.swift in Sources */,
 				09BFB0C921A724A500CE4D8E /* Palette.swift in Sources */,
 				09BFB0B321A7133300CE4D8E /* AppDelegate.swift in Sources */,
 				09BFB0C721A7139B00CE4D8E /* DrawingViewController.swift in Sources */,

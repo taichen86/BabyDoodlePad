@@ -18,6 +18,7 @@ class Palette {
     UIColor(red: 255.0/255.0, green: 194.0/255.0, blue: 187.0/255.0, alpha: 1.0),
     UIColor(red: 245.0/255.0, green: 225.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     ]
+    static let defaultColor = UIColor(red: 255/255, green: 254/255, blue: 253/255, alpha: 1.0)
     /*
     green 
     blue

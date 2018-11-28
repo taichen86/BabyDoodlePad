@@ -21,10 +21,13 @@ class DrawingViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var leftOptionsStackWidth: NSLayoutConstraint!
     @IBOutlet weak var effectsStackWidth: NSLayoutConstraint!
+    @IBOutlet weak var brushButton: UIButton!
     
     var lastPoint = CGPoint(x: 0, y: 0)
-    var currentColor = UIColor.white.cgColor
-    var currentColorIndex = 0
+    var currentColor = Palette.colors[0].cgColor
+    var currentColorIndex : Int = 1
+    var penColorIndex : Int = 1
+    var penIsRainbow = false
     
     var drawMode = DrawMode.standard
     var currentLeftOption : Int = 1 // stickers , effects
@@ -32,19 +35,40 @@ class DrawingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                                                   NSAttributedStringKey.font : UIFont(name: "Chalkboard SE", size: 26)]
+        createNewSheet()
         Audio.playAudioFile("bgtrack")
-
+        prepareEmitters()
+        
+    }
+    
+    func prepareEmitters() {
         createSnowEmitter()
         createBubbleEmitter()
         createStarsEmitter()
         createConfettiEmitter()
-        
+    }
+    
+    func createNewSheet() {
+        starsEmitter.birthRate = 0
+        bubbleEmitter.birthRate = 0
+        snowEmitter.birthRate = 0
+        confettiEmitter.birthRate = 0
+        let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        Palette.defaultColor.setFill()
+        UIRectFill(rect)
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
     }
 
 
     // MARK: left panel buttons
     @IBAction func newOptionPressed(_ sender: UIButton) {
         imageView.image = nil
+        createNewSheet()
         closeStickerPanel()
         closeEffectPanel()
     }
@@ -123,37 +147,48 @@ class DrawingViewController: UIViewController {
     
 
     // MARK: right panel buttons
-    
     @IBAction func eraserPressed(_ sender: UIButton) {
         closeStickerPanel()
         closeEffectPanel()
+        penWidth = 20
         drawMode = .standard
-        currentColorIndex = 0
-        currentColor = UIColor.white.cgColor
+        currentColor = Palette.defaultColor.cgColor
     }
     
     @IBAction func brushOptionsPressed(_ sender: UIButton) {
         closeStickerPanel()
         closeEffectPanel()
-        drawMode = .standard
+        penWidth = 10
+        if !penIsRainbow{
+            drawMode = .standard
+            currentColor = Palette.colors[penColorIndex-1].cgColor
+        }else{
+            drawMode = .rainbow
+        }
+    }
+    
+
+    @IBAction func rainbowPressed(_ sender: UIButton) {
+        closeStickerPanel()
+        closeEffectPanel()
+        drawMode = .rainbow
+        penWidth = 10
+        effectType = 10
+        brushButton.setImage(UIImage(named: "pen\(sender.tag).png"), for: .normal)
+        penIsRainbow = true
     }
 
     @IBAction func colorPressed(_ sender: UIButton) {
         closeStickerPanel()
         closeEffectPanel()
         currentColorIndex = sender.tag
+        penColorIndex = sender.tag
         currentColor = Palette.colors[currentColorIndex-1].cgColor
         drawMode = .standard
+        penWidth = 10
+        brushButton.setImage(UIImage(named: "pen\(sender.tag).png"), for: .normal)
+        penIsRainbow = false
     }
-    
-    @IBAction func rainbowPressed(_ sender: UIButton) {
-        closeStickerPanel()
-        closeEffectPanel()
-        drawMode = .rainbow
-        currentColor = UIColor.white.cgColor
-        effectType = 10
-    }
- 
     
     // MARK: touch events
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -163,12 +198,12 @@ class DrawingViewController: UIViewController {
         
         lastPoint = beginPoint
         leftOptionsStackWidth.constant = 0
-  //      brushStackWidth.constant = 0
         
         switch drawMode {
         case .sticker:
             animateSticker(p1: lastPoint, "sticker\(currentLeftOption).png")
             placeSticker(p1: lastPoint, "sticker\(currentLeftOption).png")
+            doCustomEffect(point: lastPoint)
         case .rainbow:
             colorChangedAt = beginPoint
         case .particles:
@@ -196,7 +231,6 @@ class DrawingViewController: UIViewController {
                 currentColor = Palette.colors[currentColorIndex % 5].cgColor
                 colorChangedAt = movedPoint
             }
-
             drawLine(p1: lastPoint, p2: movedPoint)
         default:
             break
@@ -221,13 +255,14 @@ class DrawingViewController: UIViewController {
 
     
     // MARK: draw
+    var penWidth : CGFloat = 10
     func drawLine(p1: CGPoint, p2: CGPoint) {
         UIGraphicsBeginImageContext(imageView.frame.size)
         imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.move(to: p1)
         context.addLine(to: p2)
-        context.setLineWidth(10)
+        context.setLineWidth(penWidth)
         context.setLineCap(.round)
         context.setStrokeColor(currentColor)
         context.strokePath()
@@ -265,6 +300,14 @@ class DrawingViewController: UIViewController {
 
     }
     
+    func doCustomEffect(point: CGPoint) {
+        switch currentLeftOption {
+        case 4: // heart
+            createStarBurstEmitter(point: CGPoint(x: point.x+22, y: point.y-22))
+        default:
+            break
+        }
+    }
     // MARK: particles
     
     func doEffect() {
@@ -444,9 +487,10 @@ class DrawingViewController: UIViewController {
         for index in 1...5 {
             let cell = CAEmitterCell()
             cell.scale = 0.3
-            cell.birthRate = 4
+            cell.birthRate = 3
             cell.lifetime = 3
-            cell.velocity = 180
+            cell.velocity = 100
+            cell.velocityRange = 30
             cell.scaleRange = 0.2
             cell.emissionLongitude = CGFloat.pi
             cell.emissionRange = CGFloat.pi/4
@@ -465,12 +509,12 @@ class DrawingViewController: UIViewController {
         starBurstEmitter.birthRate = 6
         starBurstEmitter.beginTime = CACurrentMediaTime()
             let cell = CAEmitterCell()
-            cell.scale = 0.5
+            cell.scale = 0.3
             cell.birthRate = 1
-            cell.lifetime = 0.6
+            cell.lifetime = 1.1
             cell.lifetimeRange = 1.0
-            cell.velocity = 260
-            cell.velocityRange = 100
+            cell.velocity = 160
+            cell.velocityRange = 50
             cell.emissionLongitude = CGFloat.pi
             cell.emissionRange = CGFloat.pi
             cell.contents = UIImage(named: "effect3.png")!.cgImage
@@ -482,6 +526,7 @@ class DrawingViewController: UIViewController {
             starBurstEmitter.removeFromSuperlayer()
         }
     }
+  
 
 }
 
@@ -497,7 +542,7 @@ extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let photo = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.image = photo // TODO: crop to fit
+            imageView.image = photo
         }
         dismiss(animated: true, completion: nil)
     }

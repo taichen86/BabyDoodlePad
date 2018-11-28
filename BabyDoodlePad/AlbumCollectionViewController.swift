@@ -20,15 +20,13 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func viewWillAppear(_ animated: Bool) {
         getPictures()
+       imageSelected = -1
     }
 
     func getPictures() {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
-
-        print("get pictures...")
         if let result = try? context.fetch(Picture.fetchRequest()) as? [Picture] {
             if let pics = result {
-                print("reload pics")
                 pictures = pics
                 collectionView?.reloadData()
             }
@@ -44,6 +42,22 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
         pictures.remove(at: index)
         collectionView?.reloadData()
     }
+    
+    var imageSelected : Int = -1
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToImageView" {
+            if let vc = segue.destination as? ImageViewController {
+                print("image selected \(imageSelected)")
+                let image = UIImage(data: pictures[imageSelected].image!)
+                vc.imageToShow = image
+                vc.parentVC = self
+            }
+        }
+    }
+    
+    func dismissModal() {
+       dismiss(animated: true, completion: nil)
+    }
 
     // MARK: UICollectionViewDelegateFlowLayout
     
@@ -52,15 +66,11 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return pictures.count
     }
     
@@ -70,26 +80,29 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AlbumCell
         cell.parentView = self
         cell.index = indexPath.row
-        /*
-        print(collectionView.frame.width)
-        
-        cell.frame.size = CGSize(width: collectionView.frame.width/3, height: collectionView.frame.width/3)
-        print(cell.frame.size)*/
         let picture = pictures[indexPath.row]
         if let imageData = picture.image {
             cell.imageView.image = UIImage(data: imageData)
         }
+        cell.layer.borderWidth = 0
+        cell.showOptions(false)
         return cell
     }
 
     // MARK: UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("didSelectItem \(indexPath)")
         let cell = collectionView.cellForItem(at: indexPath) as! AlbumCell
-        cell.layer.borderWidth = 10
-        cell.layer.cornerRadius = 10
+        cell.layer.borderWidth = 14
         cell.layer.borderColor = Palette.colors[Int(arc4random_uniform(4))].cgColor
         cell.showOptions(true)
+        // double tap
+        if imageSelected == indexPath.row {
+            performSegue(withIdentifier: "goToImageView", sender: self)
+        }
+        imageSelected = indexPath.row
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -98,6 +111,7 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
         cell.showOptions(false)
     }
     
+
 
     
 
@@ -120,5 +134,7 @@ class AlbumCell : UICollectionViewCell
     func showOptions(_ stat:Bool) {
         deleteButton.isHidden = !stat
     }
+    
+
     
 }

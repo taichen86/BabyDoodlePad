@@ -425,6 +425,7 @@
                         <outlet property="effectsStackWidth" destination="tO5-gM-mkc" id="iYm-lU-9zm"/>
                         <outlet property="imageView" destination="qwX-0j-Chl" id="XPt-5R-kny"/>
                         <outlet property="leftOptionsStackWidth" destination="Vie-iZ-WHJ" id="oBN-G2-K36"/>
+                        <outlet property="saveButton" destination="4ny-da-VEh" id="QoX-fv-1fH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -579,7 +580,7 @@
         <image name="color4" width="159" height="174"/>
         <image name="color5" width="159" height="174"/>
         <image name="delete" width="64" height="64"/>
-        <image name="effect1" width="128" height="128"/>
+        <image name="effect1" width="80" height="80"/>
         <image name="effect2" width="127" height="120"/>
         <image name="effect3" width="64" height="64"/>
         <image name="effect4" width="300" height="307"/>

@@ -22,6 +22,7 @@ class DrawingViewController: UIViewController {
     @IBOutlet weak var leftOptionsStackWidth: NSLayoutConstraint!
     @IBOutlet weak var effectsStackWidth: NSLayoutConstraint!
     @IBOutlet weak var brushButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     var lastPoint = CGPoint(x: 0, y: 0)
     var currentColor = Palette.colors[0].cgColor
@@ -35,13 +36,13 @@ class DrawingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        IAP.instance.iapDelegate = self
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white,
                                                                    NSAttributedStringKey.font : UIFont(name: "Chalkboard SE", size: 26)]
         createNewSheet()
         Audio.playAudioFile("bgtrack")
         prepareEmitters()
-        
+        setSaveButtonImage()
     }
     
     func prepareEmitters() {
@@ -63,6 +64,30 @@ class DrawingViewController: UIViewController {
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
+    
+    func setSaveButtonImage() {
+        if UserDefaults.standard.bool(forKey: "upgrade") == false {
+            saveButton.setImage(UIImage(named: "save-bw.png"), for: .normal)
+        }else{
+            saveButton.setImage(UIImage(named: "save-yellow.png"), for: .normal)
+        }
+    }
+    
+    // MARK: In App Purchase
+    func checkPremiumAccess() {
+        if UserDefaults.standard.bool(forKey: "upgrade") == false {
+            let alert = UIAlertController(title: "unlock", message: "upgrade to save artwork?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "later", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK!", style: .default, handler: { (action) in
+                print("purchase")
+                IAP.instance.purchase()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            saveImage()
+        }
+    }
+    
 
 
     // MARK: left panel buttons
@@ -125,12 +150,17 @@ class DrawingViewController: UIViewController {
     
     
     @IBAction func saveOptionPressed(_ sender: UIButton) {
-        print("save image...")
         closeStickerPanel()
         closeEffectPanel()
+    //    checkPremiumAccess()
+        saveImage()
+    }
+    
+    func saveImage() {
+        print("save image...")
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let picture = Picture(context: context)
-            picture.name = "Doodle"
+            picture.name = "doodle"
             if let image = imageView.image {
                 print("saving...")
                 picture.image = UIImageJPEGRepresentation(image, 1)
@@ -534,6 +564,7 @@ class DrawingViewController: UIViewController {
 extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func importPhoto() {
+        print("import photo")
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
@@ -549,3 +580,13 @@ extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationC
     
     
 }
+
+extension DrawingViewController : IAPDelegate {
+    
+    func purchaseSuccess() {
+        print("purchase success, update save button")
+        setSaveButtonImage()
+    }
+}
+
+

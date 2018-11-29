@@ -12,7 +12,7 @@ private let reuseIdentifier = "AlbumCell"
 
 class AlbumCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var pictures : [Picture] = []
+    var pictures : [Picture] = [] // TODO: reverse pictures
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class AlbumCollectionViewController: UICollectionViewController, UICollectionVie
         if let result = try? context.fetch(Picture.fetchRequest()) as? [Picture] {
             if let pics = result {
                 pictures = pics
+                pictures = pictures.reversed()
                 collectionView?.reloadData()
             }
         }

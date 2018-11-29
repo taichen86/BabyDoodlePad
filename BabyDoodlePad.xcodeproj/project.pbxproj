@@ -12,6 +12,8 @@
 		092E4E6121A802C1003316AD /* BabyDoodlePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E5F21A802C1003316AD /* BabyDoodlePad.xcdatamodeld */; };
 		092E4E6321A8107B003316AD /* AlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */; };
 		09B1985B21AD8772001A7929 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1985A21AD8772001A7929 /* ImageViewController.swift */; };
+		09B3D0FB21AEF356008E6683 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09B3D0FA21AEF356008E6683 /* StoreKit.framework */; };
+		09B3D0FD21AEF375008E6683 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3D0FC21AEF375008E6683 /* IAP.swift */; };
 		09BFB0B321A7133300CE4D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFB0B221A7133300CE4D8E /* AppDelegate.swift */; };
 		09BFB0B821A7133300CE4D8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09BFB0B621A7133300CE4D8E /* Main.storyboard */; };
 		09BFB0BA21A7133400CE4D8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BFB0B921A7133400CE4D8E /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 		092E4E6021A802C1003316AD /* BabyDoodlePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabyDoodlePad.xcdatamodel; sourceTree = "<group>"; };
 		092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewController.swift; sourceTree = "<group>"; };
 		09B1985A21AD8772001A7929 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		09B3D0FA21AEF356008E6683 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		09B3D0FC21AEF375008E6683 /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
 		09BFB0AF21A7133300CE4D8E /* BabyDoodlePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyDoodlePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BFB0B221A7133300CE4D8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09BFB0B721A7133300CE4D8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,17 +45,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09B3D0FB21AEF356008E6683 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09B3D0F921AEF356008E6683 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09B3D0FA21AEF356008E6683 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		09BFB0A621A7133300CE4D8E = {
 			isa = PBXGroup;
 			children = (
 				09BFB0B121A7133300CE4D8E /* BabyDoodlePad */,
 				09BFB0B021A7133300CE4D8E /* Products */,
+				09B3D0F921AEF356008E6683 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +86,7 @@
 				09B1985A21AD8772001A7929 /* ImageViewController.swift */,
 				09BFB0C821A724A500CE4D8E /* Palette.swift */,
 				091342B621AD144900598923 /* Audio.swift */,
+				09B3D0FC21AEF375008E6683 /* IAP.swift */,
 				09BFB0B621A7133300CE4D8E /* Main.storyboard */,
 				09BFB0B921A7133400CE4D8E /* Assets.xcassets */,
 				09BFB0BB21A7133400CE4D8E /* LaunchScreen.storyboard */,
@@ -114,6 +129,11 @@
 				TargetAttributes = {
 					09BFB0AE21A7133300CE4D8E = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -160,6 +180,7 @@
 				09B1985B21AD8772001A7929 /* ImageViewController.swift in Sources */,
 				09BFB0C921A724A500CE4D8E /* Palette.swift in Sources */,
 				09BFB0B321A7133300CE4D8E /* AppDelegate.swift in Sources */,
+				09B3D0FD21AEF375008E6683 /* IAP.swift in Sources */,
 				09BFB0C721A7139B00CE4D8E /* DrawingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,7 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B4Y8V9U543;
 				INFOPLIST_FILE = BabyDoodlePad/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +336,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TPBSoftware.BabyDoodlePad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -326,7 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B4Y8V9U543;
 				INFOPLIST_FILE = BabyDoodlePad/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +355,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TPBSoftware.BabyDoodlePad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

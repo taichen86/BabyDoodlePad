@@ -11,6 +11,7 @@ import StoreKit
 
 protocol IAPDelegate {
     func purchaseSuccess()
+    func restoreSuccess()
 }
 
 class IAP : NSObject {

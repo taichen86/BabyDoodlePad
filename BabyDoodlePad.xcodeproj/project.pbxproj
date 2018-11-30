@@ -11,6 +11,8 @@
 		091342B921AD16F500598923 /* bgtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 091342B821AD16F500598923 /* bgtrack.mp3 */; };
 		092E4E6121A802C1003316AD /* BabyDoodlePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E5F21A802C1003316AD /* BabyDoodlePad.xcdatamodeld */; };
 		092E4E6321A8107B003316AD /* AlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */; };
+		0947B8A821B131650002AFCB /* ParentalGateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0947B8A721B131650002AFCB /* ParentalGateViewController.swift */; };
+		0947B8AC21B13C520002AFCB /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0947B8AB21B13C520002AFCB /* chime.mp3 */; };
 		09B1985B21AD8772001A7929 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1985A21AD8772001A7929 /* ImageViewController.swift */; };
 		09B3D0FB21AEF356008E6683 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09B3D0FA21AEF356008E6683 /* StoreKit.framework */; };
 		09B3D0FD21AEF375008E6683 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3D0FC21AEF375008E6683 /* IAP.swift */; };
@@ -27,6 +29,8 @@
 		091342B821AD16F500598923 /* bgtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgtrack.mp3; sourceTree = "<group>"; };
 		092E4E6021A802C1003316AD /* BabyDoodlePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabyDoodlePad.xcdatamodel; sourceTree = "<group>"; };
 		092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		0947B8A721B131650002AFCB /* ParentalGateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalGateViewController.swift; sourceTree = "<group>"; };
+		0947B8AB21B13C520002AFCB /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
 		09B1985A21AD8772001A7929 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		09B3D0FA21AEF356008E6683 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		09B3D0FC21AEF375008E6683 /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				09BFB0C621A7139B00CE4D8E /* DrawingViewController.swift */,
 				092E4E6221A8107B003316AD /* AlbumCollectionViewController.swift */,
 				09B1985A21AD8772001A7929 /* ImageViewController.swift */,
+				0947B8A721B131650002AFCB /* ParentalGateViewController.swift */,
 				09BFB0C821A724A500CE4D8E /* Palette.swift */,
 				091342B621AD144900598923 /* Audio.swift */,
 				09B3D0FC21AEF375008E6683 /* IAP.swift */,
@@ -93,6 +98,7 @@
 				09BFB0BE21A7133400CE4D8E /* Info.plist */,
 				092E4E5F21A802C1003316AD /* BabyDoodlePad.xcdatamodeld */,
 				091342B821AD16F500598923 /* bgtrack.mp3 */,
+				0947B8AB21B13C520002AFCB /* chime.mp3 */,
 			);
 			path = BabyDoodlePad;
 			sourceTree = "<group>";
@@ -163,6 +169,7 @@
 				09BFB0BD21A7133400CE4D8E /* LaunchScreen.storyboard in Resources */,
 				09BFB0BA21A7133400CE4D8E /* Assets.xcassets in Resources */,
 				09BFB0B821A7133300CE4D8E /* Main.storyboard in Resources */,
+				0947B8AC21B13C520002AFCB /* chime.mp3 in Resources */,
 				091342B921AD16F500598923 /* bgtrack.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0947B8A821B131650002AFCB /* ParentalGateViewController.swift in Sources */,
 				091342B721AD144900598923 /* Audio.swift in Sources */,
 				092E4E6321A8107B003316AD /* AlbumCollectionViewController.swift in Sources */,
 				092E4E6121A802C1003316AD /* BabyDoodlePad.xcdatamodeld in Sources */,
@@ -258,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -312,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -336,7 +344,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TPBSoftware.BabyDoodlePad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -355,7 +363,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TPBSoftware.BabyDoodlePad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

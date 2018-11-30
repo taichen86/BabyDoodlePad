@@ -76,6 +76,31 @@ class DrawingViewController: UIViewController {
     // MARK: In App Purchase
     func checkPremiumAccess() {
         if UserDefaults.standard.bool(forKey: "upgrade") == false {
+            showParentalGate()
+        }else{
+            saveImage()
+        }
+    }
+    
+    func showParentalGate() {
+        performSegue(withIdentifier: "goToParentalGate", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare \(segue)")
+        if segue.identifier == "goToParentalGate" {
+            if let vc = segue.destination as? ParentalGateViewController {
+                vc.parentVC = self
+                vc.answer = [Int(arc4random_uniform(9))+1, Int(arc4random_uniform(9))+1]
+            }
+        }
+    }
+
+    
+    func closeParentalGate(success: Bool) {
+        print("close parental gate")
+        dismiss(animated: true, completion: nil)
+        if success {
             let alert = UIAlertController(title: "unlock", message: "upgrade to save artwork?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "later", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "OK!", style: .default, handler: { (action) in
@@ -83,12 +108,13 @@ class DrawingViewController: UIViewController {
                 IAP.instance.purchase()
             }))
             self.present(alert, animated: true, completion: nil)
-        }else{
-            saveImage()
         }
     }
     
-
+    @IBAction func restorePressed(_ sender: UIBarButtonItem) {
+        IAP.instance.restorePurchases()
+    }
+    
 
     // MARK: left panel buttons
     @IBAction func newOptionPressed(_ sender: UIButton) {
@@ -152,8 +178,7 @@ class DrawingViewController: UIViewController {
     @IBAction func saveOptionPressed(_ sender: UIButton) {
         closeStickerPanel()
         closeEffectPanel()
-    //    checkPremiumAccess()
-        saveImage()
+        checkPremiumAccess()
     }
     
     func saveImage() {
@@ -236,6 +261,7 @@ class DrawingViewController: UIViewController {
             doCustomEffect(point: lastPoint)
         case .rainbow:
             colorChangedAt = beginPoint
+            Audio.playSFX("chime")
         case .particles:
             animateSticker(p1: lastPoint, "effect\(effectType).png")
             placeSticker(p1: lastPoint, "effect\(effectType).png")
@@ -348,7 +374,7 @@ class DrawingViewController: UIViewController {
             if snowEffectRunning { break }
             snowEffectRunning = true
             createSnowTimer()
-            snowEmitter.birthRate = 1
+            snowEmitter.birthRate = 2
         case 2:
             bubbleTimeRemaining = 2
             if bubbleEffectRunning { break }
@@ -564,7 +590,6 @@ class DrawingViewController: UIViewController {
 extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func importPhoto() {
-        print("import photo")
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
@@ -573,18 +598,81 @@ extension DrawingViewController : UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let photo = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.image = photo
+            print(photo.size)
+            if (photo.size.height > photo.size.width) && (view.frame.width > view.frame.height) {
+                drawPortraitPhotoInLandscapeMode(photo: photo)
+            }else if (photo.size.width > photo.size.height) && (view.frame.height > view.frame.width) {
+                drawLandscapePhotoInPortraitMode(photo: photo)
+            }else{
+                drawPhotoInSameOrientation(photo: photo)
+            }
         }
         dismiss(animated: true, completion: nil)
     }
     
+    func drawPortraitPhotoInLandscapeMode(photo: UIImage) {
+        print("drawPortraitPhotoInLandscapeMode")
+        let canvasSize = CGSize(width: imageView.frame.size.width, height: imageView.frame.size.height)
+        UIGraphicsBeginImageContext(canvasSize)
+  //      UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+ //       imageView.image?.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        let height = canvasSize.height
+        print(height)
+        let ratio = photo.size.height/photo.size.width
+        print(ratio)
+        let width = height/ratio
+        print(width)
+        photo.draw(in: CGRect(origin: CGPoint(x: (canvasSize.width - width) / 2, y: 0), size: CGSize(width: width, height: height)))
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+    func drawLandscapePhotoInPortraitMode(photo: UIImage) {
+        print("drawLandscapePhotoInPortraitMode")
+        let canvasSize = CGSize(width: imageView.frame.size.width, height: imageView.frame.size.height)
+        UIGraphicsBeginImageContext(canvasSize)
+        let width = canvasSize.width
+        let ratio = photo.size.width/photo.size.height
+        let height = width/ratio
+        photo.draw(in: CGRect(origin: CGPoint(x: 0, y: (canvasSize.height - height)/2), size: CGSize(width: width, height: height)))
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+    func drawPhotoInSameOrientation(photo: UIImage) {
+        print("drawPhotoInSameOrientation")
+        let canvasSize = CGSize(width: imageView.frame.size.width, height: imageView.frame.size.height)
+        UIGraphicsBeginImageContext(canvasSize)
+        var size = photo.size
+        let ratio = photo.size.width/photo.size.height // landscape
+        if view.frame.size.width > view.frame.size.height { // landscape
+            size.height = canvasSize.height
+            size.width = size.height*ratio
+            print("landscape sizse \(size)")
+        }else{ // portrait
+            size.width = canvasSize.width
+            size.height = size.width/ratio
+        }
+        let origin = CGPoint(x: (canvasSize.width-size.width)/2, y: (canvasSize.height - size.height)/2)
+        print("origin \(origin)")
+        photo.draw(in: CGRect(origin: origin, size: CGSize(width: size.width, height: size.height)))
+        
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
     
 }
 
 extension DrawingViewController : IAPDelegate {
-    
     func purchaseSuccess() {
         print("purchase success, update save button")
+        setSaveButtonImage()
+    }
+    func restoreSuccess() {
+        print("restore success, update save button")
+        let alert = UIAlertController(title: "success", message: "your purchase has been successfully restored", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
         setSaveButtonImage()
     }
 }

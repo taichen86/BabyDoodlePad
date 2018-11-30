@@ -12,6 +12,7 @@ import AVFoundation
 class Audio {
     
     static var player : AVAudioPlayer?
+    static var sfxPlayer : AVAudioPlayer?
     
     static func playAudioFile(_ filename: String) {
         guard let url = Bundle.main.url(forResource: filename, withExtension: "mp3") else { return }
@@ -21,6 +22,14 @@ class Audio {
         player?.numberOfLoops = -1
         player?.play()
         
+    }
+    
+    static func playSFX( _ filename: String) {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: "mp3") else { return }
+        print("play sfx .. \(filename)")
+        
+        sfxPlayer = try? AVAudioPlayer(contentsOf: url)
+        sfxPlayer?.play()
     }
     
     

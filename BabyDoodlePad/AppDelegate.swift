@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         print("fetchProducts")
         IAP.instance.fetchProducts()
-        print("restore IAP")
-        IAP.instance.restorePurchases()
+ //       print("restore IAP")
+ //       IAP.instance.restorePurchases()
         return true
     }
 

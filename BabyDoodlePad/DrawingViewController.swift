@@ -50,6 +50,7 @@ class DrawingViewController: UIViewController {
         createBubbleEmitter()
         createStarsEmitter()
         createConfettiEmitter()
+        createHeartsEmitter()
     }
     
     func createNewSheet() {
@@ -265,7 +266,7 @@ class DrawingViewController: UIViewController {
         case .particles:
             animateSticker(p1: lastPoint, "effect\(effectType).png")
             placeSticker(p1: lastPoint, "effect\(effectType).png")
-            doEffect()
+            doEffect(point: lastPoint)
         default:
             break
         }
@@ -366,7 +367,7 @@ class DrawingViewController: UIViewController {
     }
     // MARK: particles
     
-    func doEffect() {
+    func doEffect(point: CGPoint) {
     //    print("do effect \(effectType)")
         switch effectType{
         case 1:
@@ -393,6 +394,14 @@ class DrawingViewController: UIViewController {
             confettiEffectRunning = true
             createConfettiTimer()
             confettiEmitter.birthRate = 3
+        case 5:
+            createCloudEmitter(point: point)
+        case 6:
+            heartsTimeRemaining = 4
+            if heartsEffectRunning { break }
+            heartsEffectRunning = true
+            createHeartsTimer()
+            heartsEmitter.birthRate = 2
         default:
             break
         }
@@ -556,6 +565,80 @@ class DrawingViewController: UIViewController {
         
         confettiEmitter.emitterCells = cells
         imageView.layer.addSublayer(confettiEmitter)
+    }
+    
+    // ------- CLOUDS --------------------------
+    func createCloudEmitter(point: CGPoint) {
+        let emitter = CAEmitterLayer()
+        emitter.emitterShape = kCAEmitterLayerLine
+        emitter.emitterSize = CGSize(width: 230, height: 1)
+        emitter.position = CGPoint(x: point.x, y: point.y+70)
+        emitter.beginTime = CACurrentMediaTime()
+        emitter.birthRate = 4
+        var cells = [CAEmitterCell]()
+        for index in 1...7 {
+            let cell = CAEmitterCell()
+            cell.scale = 0.3
+            cell.birthRate = 1
+            cell.lifetime = 3
+            cell.lifetimeRange = 1.0
+            cell.velocity = 50
+            cell.velocityRange = 30
+            cell.emissionLongitude = CGFloat.pi
+            cell.emissionRange = CGFloat.pi/4
+            cell.contents = UIImage(named: "rain\(index).png")!.cgImage
+            cells.append(cell)
+        }
+        emitter.emitterCells = cells
+        imageView.layer.addSublayer(emitter)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.76) {
+            emitter.birthRate = 0
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now()+3.1) {
+            emitter.removeFromSuperlayer()
+        }
+    }
+    
+    // ------- HEARTS --------------------------
+    var heartsTimeRemaining : Float = 0
+    var heartsEffectRunning = false
+    var heartsTimer = Timer()
+    func createHeartsTimer() {
+        heartsTimer = Timer.scheduledTimer(timeInterval: 1.1, target: self, selector: #selector(runHeartsTimer), userInfo: nil, repeats: true)
+    }
+    @objc func runHeartsTimer() {
+        heartsTimeRemaining -= 1
+        if heartsTimeRemaining < 0 {
+            heartsEmitter.birthRate = 0
+            heartsTimer.invalidate()
+            heartsEffectRunning = false
+        }
+    }
+    var heartsEmitter = CAEmitterLayer()
+    func createHeartsEmitter() {
+        heartsEmitter.emitterShape = kCAEmitterLayerLine
+        heartsEmitter.position = CGPoint(x: imageView.frame.width, y: -2)
+        heartsEmitter.emitterSize = CGSize(width: imageView.frame.width*2, height: 1)
+        heartsEmitter.birthRate = 0
+        heartsEmitter.beginTime = CACurrentMediaTime()
+        var cells = [CAEmitterCell]()
+        for index in 1...7 {
+            let cell = CAEmitterCell()
+            cell.scale = 0.4
+            cell.scaleRange = 0.1
+            cell.birthRate = 1
+            cell.lifetime = 8
+            cell.alphaSpeed = -1.0/cell.lifetime
+            cell.velocity = 40
+            cell.alphaRange = 0.5
+            cell.emissionLongitude = CGFloat.pi
+            cell.emissionRange = CGFloat.pi/4
+            cell.contents = UIImage(named: "heart\(index).png")!.cgImage
+            cells.append(cell)
+        }
+        
+        heartsEmitter.emitterCells = cells
+        imageView.layer.addSublayer(heartsEmitter)
     }
     
     // ------- PEN STARS --------------------------

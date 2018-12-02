@@ -16,7 +16,7 @@ class Audio {
     
     static func playAudioFile(_ filename: String) {
         guard let url = Bundle.main.url(forResource: filename, withExtension: "mp3") else { return }
-        print("play audio .. \(filename)")
+   //     print("play audio .. \(filename)")
         
         player = try? AVAudioPlayer(contentsOf: url)
         player?.numberOfLoops = -1
@@ -26,7 +26,7 @@ class Audio {
     
     static func playSFX( _ filename: String) {
         guard let url = Bundle.main.url(forResource: filename, withExtension: "mp3") else { return }
-        print("play sfx .. \(filename)")
+   //     print("play sfx .. \(filename)")
         
         sfxPlayer = try? AVAudioPlayer(contentsOf: url)
         sfxPlayer?.play()
